@@ -10,6 +10,7 @@ const Carousel = ({
   rightButtonImg = "",
   leftButtonImg = "",
   buttonStyle = {},
+  infiniteOptions = true,
 }) => {
   const [index, setIndex] = useState(0);
   const [childWidth, setChildWidth] = useState(0);
@@ -39,26 +40,30 @@ const Carousel = ({
     changeIndex();
   };
   const handleTouchStart = (evt) => {
-    const firstTouch = (evt.touches || evt.originalEvent.touches)[0];
-    setX(firstTouch.clientX);
+    if (infiniteOptions) {
+      const firstTouch = (evt.touches || evt.originalEvent.touches)[0];
+      setX(firstTouch.clientX);
+    }
   };
   const handleTouchMove = (evt) => {
-    if (!x) {
-      return;
-    }
+    if (infiniteOptions) {
+      if (!x) {
+        return;
+      }
 
-    let xRelease = evt.touches[0].clientX;
-    let xDifference = x - xRelease;
-    const differnece = 10;
+      let xRelease = evt.touches[0].clientX;
+      let xDifference = x - xRelease;
+      const differnece = 10;
 
-    if (xDifference > differnece && index == dataArray.length - 1) {
-      // swipe left
-      next();
-    } else if (xDifference < -differnece && index == 0) {
-      // swipe right
-      prev();
+      if (xDifference > differnece && index == dataArray.length - 1) {
+        // swipe left
+        next();
+      } else if (xDifference < -differnece && index == 0) {
+        // swipe right
+        prev();
+      }
+      setX(null);
     }
-    setX(null);
   };
   let data = dataArray?.map((data, i) => (
     <div className="child" key={i}>
