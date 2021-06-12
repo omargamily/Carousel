@@ -1,6 +1,6 @@
 ## Description
 
-Responsive carousel component that takes any HTML content and renders them accordingly.
+Responsive react carousel component that takes any HTML content and renders them accordingly.
 
 ## Installation
 
@@ -19,7 +19,7 @@ npm run start or yarn start
 or import into your project as mentioned below.
 
 ## Usage
-
+index.js
 ```React
 import ReactDOM from "react-dom";
 import React from "react";
