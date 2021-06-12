@@ -27,6 +27,14 @@
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
+.child img,
+p {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
 .row {
   display: flex;
   margin-bottom: 10px;
@@ -43,4 +51,7 @@
   width: 8px;
   height: 8px;
   background-color: #0099ff;
+}
+.marginTop {
+  margin-top: 7px;
 }
