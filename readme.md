@@ -20,9 +20,10 @@ or import into your project as mentioned below.
 
 ## Usage
 app.js
-```import React from "react";
+```
+import React from "react";
 import Carousel from "./carousel";
-const dataArray = [
+const data = [
   {
     img: "https://images.unsplash.com/photo-1485550409059-9afb054cada4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80",
     text: "carousel tet fragment",
@@ -37,43 +38,72 @@ const dataArray = [
     text: "d3",
   },
 ];
-const render = (data) => {
-  if (data.img)
-    return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          height: "100%",
-          alignItems: "center",
-        }}
-      >
-        <img src={data.img} style={{ objectFit: "contain", height: "90%" }} />
-        <p>{data.text}</p>
-      </div>
-    );
-  return <p>{data.text}</p>;
-};
 const App = () => {
   return (
     <div style={{ width: "100vw", height: 500 }}>
-      <Carousel
-        dataArray={dataArray}
-        renderFunc={render}
-        infiniteOptions={false}
-      />
+      <Carousel arrayLength={data.length} infiniteOptions={false}>
+        <Carousel.Item>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              height: "100%",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={data[0].img}
+              style={{ objectFit: "contain", height: "90%" }}
+            />
+            <p>{data[0].text}</p>
+          </div>
+        </Carousel.Item>
+        <Carousel.Item>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              height: "100%",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={data[1].img}
+              style={{ objectFit: "contain", height: "90%" }}
+            />
+          </div>
+        </Carousel.Item>
+        <Carousel.Item>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              height: "100%",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={data[2].img}
+              style={{ objectFit: "contain", height: "90%" }}
+            />
+          </div>
+        </Carousel.Item>
+        <Carousel.Item>
+          <p>{data[3].text}</p>
+        </Carousel.Item>
+      </Carousel>
     </div>
   );
 };
 export default App;
 ```
-
+### Carousel slide
+ each slide should be wrapped in a `<Carousel.Item> {...slide content } </Carousel.Item>`
 ### Props
-
-`dataArray` : is an `array` you want to render in the carousel\
-`renderFunc` : is a `function` that takes dataArray[i] and renders
-it accordingly\
+`arrayLength` : is data array lenth\
 `infiniteOptions`: is a `boolean` by default `true` for infinite options support\
 `buttons` : is a `boolean` by default `false` if set `true` will show previous and next buttons used for navigation\
 `leftButtonText` : is the `string` text you want to view on the left button by default `previous`\
