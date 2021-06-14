@@ -1,15 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./carousel.css";
 
-const RenderData = ({ data, renderFunc }) =>
-  data?.map((data, i) => (
-    <div className="child" key={i}>
-      {renderFunc(data)}
-    </div>
-  ));
 const Carousel = ({
-  dataArray,
-  renderFunc,
+  children,
+  arrayLength = 0,
   buttons = false,
   buttonStyle = {},
   leftButtonText = "previous",
@@ -35,7 +29,7 @@ const Carousel = ({
     changeIndex();
   };
   const next = () => {
-    const status = index + 1 < dataArray.length;
+    const status = index + 1 < arrayLength;
     if (status) contentRef.current.scrollLeft += childWidth;
     if (!status && infiniteOptions) contentRef.current.scrollLeft = 0;
     changeIndex();
@@ -44,7 +38,7 @@ const Carousel = ({
     const status = index - 1 > -1;
     if (status) contentRef.current.scrollLeft -= childWidth;
     if (infiniteOptions && !status)
-      contentRef.current.scrollLeft = (dataArray?.length - 1) * childWidth;
+      contentRef.current.scrollLeft = (arrayLength - 1) * childWidth;
     changeIndex();
   };
   const handleTouchStart = (evt) => {
@@ -59,7 +53,7 @@ const Carousel = ({
     const xDifference = x - xRelease;
     const differnece = 10;
 
-    if (xDifference > differnece && index == dataArray.length - 1) {
+    if (xDifference > differnece && index == arrayLength - 1) {
       // swipe left
       next();
     } else if (xDifference < -differnece && index == 0) {
@@ -80,7 +74,7 @@ const Carousel = ({
     if (xDifference < -threshold) prev();
     setX(null);
   };
-  const indicators = dataArray.map((d, i) => (
+  const indicators = [...Array(arrayLength)].map((d, i) => (
     <div
       onClick={() => handleIndicatorSelect(i)}
       className={`indicator ${i === index ? "active" : ""}`}
@@ -98,7 +92,7 @@ const Carousel = ({
         onMouseDown={mouseDown}
         onMouseUp={mouseUp}
       >
-        <RenderData data={dataArray} renderFunc={renderFunc} />
+        {children}
       </div>
       <div className="row marginTop">{indicators}</div>
       {buttons && (
@@ -122,5 +116,6 @@ const Carousel = ({
     </div>
   );
 };
-
+const Item = ({ children }) => <div className="child">{children}</div>;
+Carousel.Item = Item;
 export default Carousel;
