@@ -2,11 +2,13 @@
   "name": "carousel",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx webpack serve --config ./webpack.config.js --host 0.0.0.0",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "deploy": "gh-pages -d dist",
+    "publish-demo": "npm run build && npm run deploy"
   },
   "keywords": [],
   "author": "",
@@ -20,8 +22,10 @@
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
     "@webpack-cli/generators": "^2.1.0",
+    "babel-cli": "^6.26.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.5",
+    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.3.1",
     "style-loader": "^2.0.0",
     "webpack": "^5.37.1",

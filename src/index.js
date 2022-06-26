@@ -1,5 +1,3 @@
-import ReactDOM from "react-dom";
-import React from "react";
-import App from "./app";
+import Carousel from "./carousel";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export { Carousel };
